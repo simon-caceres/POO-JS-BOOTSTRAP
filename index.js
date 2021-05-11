@@ -4,10 +4,6 @@ class Product {
         this.price = price;
         this.year = year;
     }
-
-    addProduct() {
-
-    }
 }
 
 class UI {
@@ -51,8 +47,6 @@ class UI {
             document.querySelector('.alert').remove();
         }, 3000)
     }
-
-
 }
 
 //DOM EVENTS
@@ -60,15 +54,19 @@ class UI {
 document.getElementById('product-form')
     .addEventListener('submit', (e) => {
         e.preventDefault()
+        const ui = new UI();
+
+        if (e.target[0].value === '' || e.target[1].value === '' || e.target[2].value === '' ) {
+            return ui.showMessage('Elements can`t be empty', 'danger');
+        }
         const product = new Product(
             e.target[0].value,
             e.target[1].value,
             e.target[2].value,
         )
-
-        const ui = new UI();
+            
         ui.addProduct(product);
-        ui.showMessage('Product Add Success', 'success')
+        ui.showMessage('Product Add Success', 'success');
     })
 
 document.getElementById('product-list')
